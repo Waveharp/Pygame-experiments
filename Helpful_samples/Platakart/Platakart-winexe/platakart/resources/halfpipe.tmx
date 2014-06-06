@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="90" height="32" tilewidth="70" tileheight="70">
+ <properties>
+  <property name="description" value="[not set]"/>
+  <property name="name" value="half pipe"/>
+  <property name="thumbnail" value="testtrack-thumb"/>
+ </properties>
+ <tileset firstgid="1" source="tiles_spritesheet.tsx"/>
+ <layer name="background" width="90" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKHr+v07LMdAwVVTVVVVVVVVVVVVVX3wAP2fWf0=
+  </data>
+ </layer>
+ <layer name="platforms" width="90" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzgEJAAAIA7D3b2BbSxwE2RIsAQAAAAAAAAAAAOCzuQ5A0QLbXwCa
+  </data>
+ </layer>
+ <layer name="foreground" width="90" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAD4MLQAAAQ==
+  </data>
+ </layer>
+ <objectgroup name="terrain" width="90" height="32">
+  <object type="pymunktmx_box" x="70" y="2100" width="6160" height="70">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_box" x="6230" y="-210" width="70" height="2380">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_box" x="0" y="-840" width="70" height="3010">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_poly" x="1260" y="2100">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+   <polygon points="0,0 0,-560 70,-560 107,-417 133,-313 197,-177 255,-111 350,-70 490,-70 490,0"/>
+  </object>
+  <object type="pymunktmx_poly" x="2310" y="2100">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+   <polygon points="0,0 0,-70 140,-70 239,-111 301,-177 363,-312 387,-415 420,-560 490,-560 490,0"/>
+  </object>
+  <object type="pymunktmx_poly" x="5460" y="1750">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+   <polygon points="0,0 0,-70 140,-70 239,-111 301,-177 363,-312 387,-415 420,-560 490,-560 490,0"/>
+  </object>
+  <object type="pymunktmx_poly" x="4410" y="1750">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+   <polygon points="0,0 0,-560 70,-560 107,-417 133,-313 197,-177 255,-111 350,-70 490,-70 490,0"/>
+  </object>
+  <object type="pymunktmx_box" x="4410" y="1750" width="1540" height="350">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_box" x="2800" y="1540" width="700" height="560">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_box" x="980" y="1540" width="280" height="560">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object x="1540" y="2240"/>
+  <object type="pymunktmx_box" x="3500" y="1190" width="910" height="910">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_box" x="5950" y="1190" width="280" height="910">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_poly" x="3500" y="1540">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+   <polygon points="0,0 0,-350 -104,-200 -212,-122 -422,-50 -700,0"/>
+  </object>
+  <object type="pymunktmx_poly" x="70" y="2100">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+   <polygon points="0,0 0,-1120 420,-1120 472,-982 591,-800 757,-639 910,-560 910,0"/>
+  </object>
+  <object type="pymunktmx_poly" x="5880" y="1190">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+   <polygon points="0,0 16,-217 67,-842 350,-840 350,0"/>
+  </object>
+  <object type="pymunktmx_poly" x="4200" y="1190">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+   <polygon points="0,0 0,-350 -104,-200 -212,-122 -422,-50 -700,0"/>
+  </object>
+  <object x="2030" y="2100"/>
+  <object type="pymunktmx_box" x="1750" y="2030" width="560" height="70">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_box" x="4900" y="1680" width="560" height="70">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_poly" x="4200" y="1190">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+   <polygon points="0,0 0,-350 210,-350 252,-118 280,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="control" width="90" height="32">
+  <object type="platakart_start_position" x="210" y="910" width="70" height="70">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

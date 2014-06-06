@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="180" height="32" tilewidth="70" tileheight="70" backgroundcolor="#aaffff">
+ <properties>
+  <property name="description" value="Same as before only with a|           little more description to|           see. How groovy."/>
+  <property name="name" value="Another"/>
+  <property name="thumbnail" value="testtrack-thumb"/>
+ </properties>
+ <tileset firstgid="1" name="tiles_spritesheet" tilewidth="70" tileheight="70" spacing="2">
+  <image source="tiles_spritesheet.png" trans="ff00ff" width="914" height="936"/>
+ </tileset>
+ <layer name="background" width="180" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt0jsOw0AMA9E9kO9/vlRqAgTIx9pRuEPglQZtWtda6/rS+uFZ6VmF7Kc3UI4K2U9voBwVsp/eQDkqZD+9gXJUyH56A+WokP30BspRIfvpDZSjQvbTGyhHheynN1COCtlPb6AcFbKf3qB72ztDf9N09E7d3R35h+5T0Tt1dneG6qfvZTp6p67uHSHegb6X6eidOrp3h/6Hn/zLjtDfnXzPVCb8w3fepSP0Dafe84SQd0y8wzT0Bnd1T8quf0b1T0ZvkBry207a+VW855y4s/ecFHf2npPiztw9S5IkSZIkSZIkneABiNU2Qg==
+  </data>
+ </layer>
+ <layer name="platforms" width="180" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwSEBAAAAAiD/P/CtJ4xAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAMDTACcqAJo=
+  </data>
+ </layer>
+ <layer name="foreground" width="180" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzqENADAMA0GPEtr9FwwJKCqKVHInvUydAAAAAAAAAACbasq1AAAAAMDb+X0AAAAAAAAAAAAAljWIoACK
+  </data>
+ </layer>
+ <objectgroup name="terrain" width="180" height="32">
+  <object type="pymunktmx_box" x="1120" y="1330" width="1050" height="280">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_poly" x="2030" y="1330">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+   <polygon points="140,0 140,280 700,280 700,-490"/>
+  </object>
+  <object type="pymunktmx_box" x="2730" y="840" width="1470" height="770">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_poly" x="4200" y="1330">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+   <polygon points="0,-490 0,280 700,280 700,0"/>
+  </object>
+  <object type="pymunktmx_box" x="4900" y="1330" width="2100" height="280">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_box" x="4900" y="770" width="1470" height="280">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_poly" x="7000" y="980">
+   <properties>
+    <property name="friction" value="0.9"/>
+   </properties>
+   <polygon points="0,0 -770,350 0,350"/>
+  </object>
+  <object type="pymunktmx_box" x="7350" y="1330" width="4200" height="280">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_box" x="7490" y="1050" width="1470" height="140">
+   <properties>
+    <property name="shape.friction" value="0.9"/>
+   </properties>
+  </object>
+  <object type="pymunktmx_box" x="11410" y="-280" width="140" height="1610"/>
+  <object type="pymunktmx_box" x="1050" y="-490" width="70" height="2100"/>
+ </objectgroup>
+ <objectgroup name="control" width="180" height="32">
+  <object type="platakart_start_position" x="2100" y="1260" width="70" height="70">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

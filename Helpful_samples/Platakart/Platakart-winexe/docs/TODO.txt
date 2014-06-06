@@ -1,0 +1,16 @@
+# -*- mode: markdown; coding: utf-8; -*-
+
+High Priority
+=============
+
+* Write How-To-Hack Document
+* Improve the README.md file for github specifically
+
+Everything Else
+===============
+
+* Find or make a tileset with more angle options for terrain
+* Scale UI to game resolution
+* Implement support for fullscreen
+* Abstract the input layer so that joysticks can be configured
+* Gather sound effects for the game (engine noise, collisions, etc)

@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: PyTMX
+Version: 2.16.5
+Summary: Map loader for TMX Files - Python 2.7
+Home-page: https://github.com/bitcraft/pytmx
+Author: bitcraft
+Author-email: leif.theden@gmail.com
+License: LGPLv3
+Download-URL: http://githib.com/bitcraft/pytmx/tarball/2.16.5
+Description: https://github.com/bitcraft/PyTMX
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Games/Entertainment
+Classifier: Topic :: Multimedia :: Graphics
+Classifier: Topic :: Software Development :: Libraries :: pygame

@@ -1,0 +1,18 @@
+Info:/Health: 1000/Speed: 2/Jump: 9/Fireballtype: 1/Hyper: 60,-60, 60,60, 60,-30/
+Specials/fA:30/dA:31/dB:29/dpmfB:32/qcfA:33
+fi:1--att:4,0,10,10
+fi:1--att:5,0,10,10--vect:5,0/fi:2--att:6,100,6,4--vect:5,-8
+# None
+fi:1--att:1,50,6,4
+fi:1--att:1,50,6,4
+fi:1--att:1,50,6,4
+fi:0--move: 4,0/fi:1--move: 4,0/fi:0--att:2,90,6,4
+fi:0--att:1,40,6,4--vect:-2,-2
+fi:0--att:1,40,6,4--vect:-2,-2
+fi:0--att:1,40,6,4--vect:-2,-2
+fi:1--att:2,80,3,3
+fi:2--att:2,90,6,4--vect:-2,-5
+fi:0--move: 2,0/fi:1--move: 1,0/fi:2--move: 1,0--att:1,40,4,3
+fi:1--att:2,50,6,4--vect:-2,-8
+fi:0--move: 2,0--att:2,90,6,5--vect:-1,-5/ fi:1--move:4,0/ fi:2--move:5,-15--att:2,50,6,5/ fi:3--move:5,-15/fi:4--att:8,0,0,0
+fi:1--att:3,40,4,4--vect:6,0--point:20,-30

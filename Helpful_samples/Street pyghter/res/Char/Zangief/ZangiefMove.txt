@@ -1,0 +1,19 @@
+Info:/Health: 900/Speed: 2/Jump: 8/Fireballtype: 2/Hyper: 30,-30, 30,-30, 30,-30/
+Specials/hcbB:29/qcfA:30/360A:31/360B:33
+fi:1--att:4,0,10,10
+fi:1--att:5,0,10,10--vect:0,-6/fi:3--att:5,0,10,10--vect:0,6/fi:5--att:6,130,6,4--vect:-5,-10
+# None
+fi:1--att:1,50,6,4
+fi:1--att:1,50,6,4
+fi:1--att:1,50,6,4
+fi:0--move: 4,0/fi:1--move: 4,0/fi:0--att:2,90,6,4
+fi:0--att:1,40,6,4--vect:-2,-2
+fi:0--att:1,40,6,4--vect:-2,-2
+fi:0--att:1,40,6,4--vect:-2,-2
+fi:1--att:2,80,3,3
+fi:0--move:6,0/fi:1--move:4,0--att:2,60,6,4/fi:2--move:4,0/fi:3--move:2,0
+fi:1--move:3,0--att:2,100,6,4/fi:2--move:3,0/fi:3--move:3,0
+fi:2--att:4,0,10,10
+fi:1--att:5,0,10,10--vect:0,-6/fi:3--att:5,0,10,10--vect:0,6/fi:5--att:6,200,6,4--vect:-5,-12
+fi:0--move:4,0/fi:1--move:4,0/fi:2--move:4,0/fi:4--att:4,0,10,10
+fi:1--att:5,0,10,10--vect:8,-4/fi:3--att:5,0,10,10--vect:0,6/fi:5--att:6,200,6,4--vect:-5,-12

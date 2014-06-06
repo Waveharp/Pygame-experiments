@@ -1,0 +1,65 @@
+<!-- -*- mode: markdown; coding: utf-8; -*- -->
+
+<!-- This document can be rendered by a markdown renderer into HTML. -->
+
+<p><link type="text/css" rel="Stylesheet" href="github.css" /></p>
+<h1>Getting Set Up To Work</h1>
+<p>The preferred way to work with Platakart and its dependencies is with
+virtualenv via virtualenvwrapper however this is not stictly
+necessary. Instructions are provided for setting a system up for working on
+Platakart with and without virtualenv.</p>
+<p>The instructions favor working with Linux. virtualenv and virtualenvwrapper can
+be configured to work from a windows machine but not quite as easily as from a
+Linux machine.</p>
+<h1>Changes</h1>
+<ul>
+<li>2014-03-28 wkmanire ::: started the ball rolling</li>
+</ul>
+<h1>Prerequisites</h1>
+<ul>
+<li>A git client to checkout the source and some of the dependencies</li>
+<li>A mercurial client for getting the source for pygame and pymunk</li>
+<li>Python 2.7.x</li>
+<li><a href="mapeditor.org">Tiled map editor</a></li>
+<li>Be familiar with <a href="http://docs.python.org/2/using/cmdline.html#environment-variable">environment variables</a></li>
+<li>Your favorite text editor</li>
+<li>Maybe a beer or two.</li>
+</ul>
+<h1>virtualenv with virtualenvwrapper</h1>
+<p>First install python2.7.5+ if you don't already have it installed.</p>
+<p>See <a href="http://virtualenvwrapper.readthedocs.org/en/latest/install.html">virtualenvwrapper</a> for setup instructions for virtualenv wrapper.</p>
+<p>Create a virtual environment for Platakart that uses cPython 2.7 and that does not inherit system packages:</p>
+<pre><code>mkvirtualenv -p /usr/bin/python2.7 --no-site-packages
+</code></pre>
+<p>Create a directory for working with Platakart and its dependencies:</p>
+<pre><code>mkdir ~/Projects
+</code></pre>
+<p>It is possible to satisfy all of the dependencies without getting the source, but having the source on hand can make working on Platakart a lot easier. </p>
+<p>Checkout the dependencies:</p>
+<pre><code>hg clone https://bitbucket.com/pygame/pygame
+hg clone https://bitbucket.com/viblo/pymunk
+git clone https://github.com/bitcraft/pytmx
+git clone https://github.com/bitcraft/pyscroll
+git clone https://github.com/wkmanire/pymunktmx
+git clone https://github.com/wkmanire/PlataKart
+</code></pre>
+<p><em>*You could batch all of these together in one command but the author finds it best to run them one at a time.</em></p>
+<p>Now let's build and install pygame into our virtualenv. First you'll need to make sure you have all of the required packages installed to build it.</p>
+<p>With aptitude on Debian-based systems:</p>
+<pre><code>sudo apt-get install build-essential \
+    python-dev python-numpy \
+    ffmpeg libsdl-image1.2-dev \
+    libsdl-mixer1.2-dev libsdl-ttf2.0-dev \
+    libsmpeg-dev libsdl1.2-dev \
+    libportmidi-dev libswscale-dev \
+    libavformat-dev libavcodec-dev
+
+cd pygame &amp;&amp; python setup.py build
+sudo python setup.py install
+</code></pre>
+<script>
+window.scroll(0, 100000);
+setTimeout(function () {
+    window.location = window.location;
+}, 1000);
+</script>
