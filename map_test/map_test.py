@@ -1,7 +1,13 @@
 import pygame
+from pygame.locals import *
 from pytmx import tmxloader
 
 pygame.init()
+
+# the clock object makes sure program runs
+# (at most) a certain FPS
+fpsClock = pygame.time.Clock()
+
 size = [640, 480]
 screen = pygame.display.set_mode(size)
 
@@ -18,9 +24,9 @@ def main():
 			if event.type == pygame.QUIT:
 				done = True
 
-		clock.tick(60)
-
-		pygame.display.flip()
+				
+	clock.tick(60)
+	pygame.display.flip()
 
 	pygame.quit()	
 
