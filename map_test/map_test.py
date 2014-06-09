@@ -1,4 +1,5 @@
 import pygame
+import tilerender
 from pygame.locals import *
 from pytmx import tmxloader
 
