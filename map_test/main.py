@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, os
 import constants
 import tilerender
 import level
@@ -10,7 +10,8 @@ fpsClock = pygame.time.Clock()
 windowSurfaceObj = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Map Test, Python 2')
 
-mousex, mousey = 0, 0
+level1 = level.Level('test.tmx')
+
 
 while True:
 	windowSurfaceObj.fill(constants.WHITE)
