@@ -1,4 +1,0 @@
-karts ::: http://opengameart.org/content/simple-car-textures
-buttons ::: http://opengameart.org/content/ui-pack
-sky-bg ::: http://opengameart.org/node/10605
-tileset ::: http://opengameart.org/content/platformer-art-deluxe
