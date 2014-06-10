@@ -1,4 +1,5 @@
 import pygame
+import tilerender
 from pygame.locals import *
 from pytmx import tmxloader
 
@@ -29,10 +30,6 @@ def main():
 	pygame.display.flip()
 
 	pygame.quit()	
-
-tmxdata = tmxloader.load_pygame("test.tmx")
-image = tmxdata.get_tile_image(1, 1, 1)
-screen.blit(image)
 
 if __name__ == "__main__":
 	main()

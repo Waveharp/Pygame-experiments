@@ -1,7 +1,7 @@
 # Render tile maps
 
 import pygame as pg
-import tmx
+import pytmx
 
 class Renderer(object):
 	"""

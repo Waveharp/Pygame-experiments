@@ -15,6 +15,9 @@ def load_tile_table(filename, width, height):
 	return tile_table
 
 class Level(object):
+	""" Load and store the map of the level, together with all items."""
+
+
 	def load_file(self, filename="level.map"):
 		self.map = []
 		self.key = {}
@@ -107,35 +110,100 @@ class Level(object):
 						   (map_x*MAP_TILE_WIDTH, map_y*MAP_TILE_HEIGHT))
 		return image, overlays
 
+class TileCache:
+	"""Load tilesets lazily into global cache. """
+
+	def __init__(self, width=32, height=None):
+		self.width = width
+		self.height = height or width
+		self.cache = {}
+
+	def __getitem__(self, filename):
+		""" Return a table of tiles, load it from disk if needed."""
+
+		key = (filename, self.width, self.height)
+		try:
+			return self.cache[key]
+		except KeyError:
+			tile_table = self._load_tile_table(filename, self.width, self.height)
+			self.cache[key] = tile_table
+			return tile_table
+
+	def _load_tile_table(self, filename, width, height):
+		"""Load an image and split it into tiles. """
+
+		image = pygame.image.load(filename).convert()
+		image_width, image_height = image.get_size()
+		tile_table = []
+		for tile_x in range(0, image_width/width):
+			line = []
+			tile_table.append(line)
+			for tile_y in range(0, image_height/height):
+				rect = (tile_x*width, tile_y*height, width, height)
+				line.append(image.subsurface(rect))
+		return tile_table
+
+class Sprite(pygame.sprite.Sprite):
+	def __init__(self, pos=(0, 0), frames=None):
+		super(Sprite, self).__init__()
+		self.image = frames[0][0]
+		self.rect = self.image.get_rect()
+		self.pos = pos
+
+	def _get_pos(self):
+		""" Check current position of sprite on map. """
+		return (self.rect.midbottom[0]-12)/24, (self.rect.midbottom[1]-16)/16
+
+	def _set_pos(self, pos):
+		""" Set position and depth of sprite on map. """
+		self.rect.midbottom = pos[0]*24+12, pos[1]*16+16
+		self.depth = self.rect.midbottom[1]
+
+	pos = property(_get_pos, _set_pos)
+
+	def move(self, dx, dy):
+		""" Change position of sprite on screen. """
+		self.rect.move_ip(dx, dy)
+		self.depth = self.rect.midbottom[1]
+
 if __name__=='__main__':
 	screen = pygame.display.set_mode((424, 320))
 
 	MAP_TILE_WIDTH = 24
 	MAP_TILE_HEIGHT = 16
-	MAP_CACHE = {
-		'ground.png': load_tile_table('ground.png', MAP_TILE_WIDTH,
-										MAP_TILE_HEIGHT),
-	}
+	MAP_CACHE = TileCache(MAP_TILE_WIDTH, MAP_TILE_HEIGHT)
 
 	level = Level()
 	level.load_file('level.map')
+
+	SPRITE_CACHE = TileCache(32, 32)
+	sprites = pygame.sprite.RenderUpdates()
+	for pos, tile in level.items.iteritems():
+		sprite = Sprite(pos, SPRITE_CACHE[tile["sprite"]])
+		sprites.add(sprite)
 
 	clock = pygame.time.Clock()
 
 	background, overlay_dict = level.render()
 	overlays = pygame.sprite.RenderUpdates()
 	game_over = False
+
 	for (x, y), image in overlay_dict.iteritems():
 		overlay = pygame.sprite.Sprite(overlays)
 		overlay.image = image
 		overlay.rect = image.get_rect().move(x * 24, y * 16 - 16)
 	screen.blit(background, (0, 0))
+
 	while not game_over:
+		sprites.clear(screen, background)
+		dirty = sprites.draw(screen)
 		overlays.draw(screen)
-		pygame.display.flip()
+		pygame.display.update(dirty)
 		clock.tick(15)
+
 		for event in pygame.event.get():
 			if event.type == pygame.locals.QUIT:
 				game_over = True
+
 			elif event.type == pygame.locals.KEYDOWN:
 				pressed_key = event.key
