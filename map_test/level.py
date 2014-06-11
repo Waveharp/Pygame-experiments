@@ -59,4 +59,4 @@ def load_all_tmx(directory, accept=('.tmx')):
 			mapfiles[name] = os.path.join(directory, mapfile)
 	return mapfiles
 
-TMX = load_all_tmx("E:\Documents\Projects\Python\Pygame\map_test", 'tmx')
+TMX = load_all_tmx(os.path.join("E:\Documents\Projects\Python\Pygame\map_test", 'tmx'))

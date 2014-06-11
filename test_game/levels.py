@@ -1,7 +1,8 @@
 import pygame
+
 import constants
 import platforms
-from pytmx import tmxloader
+from pytmx import load_pygame
 from spritesheet_functions import SpriteSheet
 
 class Level():
@@ -27,13 +28,6 @@ class Level():
         self.platform_list = pygame.sprite.Group()
         self.enemy_list = pygame.sprite.Group()
         self.player = player
-
-    def load_map(self, filename):
-        self.tmxdata = tmxloader.load_pygame(filename)
-
-    def draw_tiles(self, x, y, layer):
-        self.image = self.tmxdata.get_tile_image(x, y, layer)
-        screen.blit(image, position)
 
     # Update everything on this level
     def update(self):
@@ -77,5 +71,23 @@ class Level_01(Level):
         # Call the parent constructor
         Level.__init__(self, player)
 
-        self.load_map("test.tmx")
+        sprite_sheet = SpriteSheet("backgrounds.png")
+        self.background = sprite_sheet.get_image(0, 63, 231, 63)
+        self.background = pygame.transform.scale(self.background, (constants.SCREEN_WIDTH,
+                                                                 constants.SCREEN_HEIGHT))
+        self.background.set_colorkey(constants.WHITE)
+        self.level_limit = -2500
+
+        # Array with type of platform, and x, y location of the platform.
+        level = [ [platforms.STONE_WALL, 30, 650]
+                  ]
+
         
+
+        # Go through the array above and add platforms
+        for platform in level:
+            block = platforms.Platform(platform[0])
+            block.rect.x = platform[1]
+            block.rect.y = platform[2]
+            block.player = self.player
+            self.platform_list.add(block)
