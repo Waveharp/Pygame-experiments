@@ -9,7 +9,7 @@
   </tile>
   <tile id="42">
    <properties>
-    <property name="Collidable" value="True"/>
+    <property name="Collideable" value="True"/>
    </properties>
   </tile>
  </tileset>

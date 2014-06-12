@@ -1,6 +1,7 @@
 import sys, os
 import pygame as pg
 import tilerender
+import levels
 import constants as c
 from player import Player
 
@@ -20,6 +21,7 @@ player.rect.y = c.SCREEN_HEIGHT - player.rect.height
 active_sprite_list = pg.sprite.Group()
 active_sprite_list.add(player)
 
+current_level = levels.Level_01('test.tmx')
 
 """Load tmx file from current dir, create 
 tile_renderer object and load tmx file. """
