@@ -2,31 +2,27 @@ import pygame as pg
 import levels
 import tilerender
 import constants
-import main
 from spritesheet_functions import SpriteSheet 
 
 class Level(object):
-	""" Generic super-class for levels. """
-	platform_list = None
-	background = None
+	def __init__(self, screen):
+		self.screen = screen
+		self.renderer = tilerender.Renderer('test.tmx')
+		self.map_image = self.renderer.make_map()
+		self.viewport = self.make_viewport(self.map_image)
+		self.level_surface = self.make_level_surface(self.map_image)
 
-	def __init__(self, name):
-		self.name = name
-		self.tmx_map = main.tmx_file
-		self.platform_list = pg.sprite.Group()
-		self.player = player
+	def make_level_surface(self, map_image):
+		map_rect = map_image.get_rect()
+		map_width = map_rect.map_width
+		map_height = map_rect.map_height
+		size = map_width, map_height
+		return pg.Surface(size).convert()
 
-	def draw(self, screen):
-		self.fill(constants.BLACK)
-		screen.blit(self.background)
+	def make_viewport(self, map_image):
+		map_rect = map_image.get_rect()
+		return self.screen.get_rect()
 
-	def make_blockers(self, blocker_name):
-		"""
-		Make collideable blockers.
-		"""
-		pass
-
-class Level_01(Level):
-	def __init__(self, name):
-		Level.__init__(self, name)
-		tmx_file = os.path.join(os.getcwd(), name)
+	def render(self, screen):
+		self.level_surface.blit(self.map_image, self.viewport, self.viewport)
+		screen.blit(self.level_surface, (0,0), self.viewport)

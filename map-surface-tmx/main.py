@@ -1,7 +1,6 @@
 import sys, os
 import pygame as pg
 import tilerender
-import levels
 import constants as c
 from player import Player
 
@@ -13,15 +12,6 @@ main_surface = pg.display.set_mode((c.SCREEN_WIDTH, c.SCREEN_HEIGHT))
 main_rect = main_surface.get_rect()
 pg.display.set_caption("Messin' with maps")
 
-player = Player()
-
-player.rect.x = 30
-player.rect.y = c.SCREEN_HEIGHT - player.rect.height
-
-active_sprite_list = pg.sprite.Group()
-active_sprite_list.add(player)
-
-current_level = levels.Level_01('test.tmx')
 
 """Load tmx file from current dir, create 
 tile_renderer object and load tmx file. """
@@ -33,34 +23,40 @@ method. Used to blit onto main_surface. """
 map_surface = tile_renderer.make_map()
 map_rect = map_surface.get_rect()
 
+"""Create a list of rects called "blockers" that the
+player can collide with. The getObjects() method 
+returns a list of objects in your tile map. Each 
+tile has properties like name, type, x, y, width,
+height.  Double click objects in Tiled to see these
+properties.  These properties are used to make rect 
+objects in Pygame."""
+blockers = []
+tilewidth = tile_renderer.tmx_data.tilewidth
+for tile_object in tile_renderer.tmx_data.getObjects():
+	properties = tile_object.__dict__
+	if properties['name'] == 'blocker':
+		x = properties['x']
+		y = properties['y']
+		width = properties['width']
+		height = properties['height']
+		new_rect = pg.Rect(x, y, width, height)
+		blockers.append(new_rect)
 
+player = Player(blockers)
 
 """Simple game loop that blits the map_surface onto
 main_surface."""
 while True:
+	keys = pg.key.get_pressed()
+	player.update(keys)
 	main_surface.blit(map_surface, map_rect)
+	player.draw(main_surface)
 
 	for event in pg.event.get():
 		if event.type == pg.QUIT:
 			pg.quit()
 			sys.exit()
 
-		if event.type == pg.KEYDOWN:
-			if event.key == pg.K_LEFT:
-				player.go_left()
-			if event.key == pg.K_RIGHT:
-				player.go_right()
-			if event.key == pg.K_UP:
-				player.jump()
-		if event.type == pg.KEYUP:
-			if event.key == pg.K_LEFT and player.change_x < 0:
-				player.stop()
-			if event.key == pg.K_RIGHT and player.change_x > 0:
-				player.stop()
-
-
-	active_sprite_list.update()
-	active_sprite_list.draw(main_surface)
 	pg.display.update()
 	fps_clock.tick(50)
 
