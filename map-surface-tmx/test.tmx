@@ -34,7 +34,20 @@
   </data>
  </layer>
  <objectgroup name="Collision Layer" width="20" height="20">
-  <object x="125" y="336" width="63" height="20"/>
-  <object x="112" y="219" width="108" height="63"/>
+  <object name="blocker" x="126" y="336" width="63" height="21"/>
+  <object name="blocker" x="252" y="273" width="63" height="21"/>
+  <object name="blocker" x="189" y="294" width="63" height="21"/>
+  <object name="blocker" x="42" y="357" width="63" height="21"/>
+  <object name="blocker" x="0" y="399" width="420" height="21"/>
+  <object name="blocker" x="0" y="0" width="420" height="21"/>
+  <object name="blocker" x="399" y="21" width="21" height="378"/>
+  <object name="blocker" x="0" y="210" width="126" height="21"/>
+  <object name="blocker" x="0" y="231" width="21" height="168"/>
+  <object name="blocker" x="231" y="252" width="21" height="147"/>
+  <object name="blocker" x="0" y="105" width="21" height="21"/>
+  <object name="blocker" x="84" y="189" width="21" height="21"/>
+  <object name="blocker" x="63" y="168" width="21" height="21"/>
+  <object name="blocker" x="42" y="147" width="21" height="21"/>
+  <object name="blocker" x="21" y="126" width="21" height="21"/>
  </objectgroup>
 </map>
