@@ -33,4 +33,8 @@
    eJy1keEKADAEhL2OvP/77ZeSxuhuSlM7XwcRXhiR9ZunZB4jjMy09LJ4XqM7zL5Qn7d+hGlNIjxWbHgatNXdtv5eO5nypnvtNBoy6je83Jv/N7zJTMi8lb66rd+fnQflgg5f
   </data>
  </layer>
+ <objectgroup name="Collision Layer" width="20" height="20">
+  <object x="125" y="336" width="63" height="20"/>
+  <object x="112" y="219" width="108" height="63"/>
+ </objectgroup>
 </map>
