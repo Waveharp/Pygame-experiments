@@ -56,6 +56,18 @@ while True:
 		if event.type == pg.QUIT:
 			pg.quit()
 			sys.exit()
+		if event.type == pg.KEYDOWN:
+			if event.key == pg.K_LEFT:
+				player.go_left()
+			if event.key == pg.K_RIGHT:
+				player.go_right()
+			if event.key == pg.K_UP:
+				player.jump()
+		if event.type == pg.KEYUP:
+			if event.key == pg.K_LEFT and player.x_vel < 0:
+				player.stop()
+			if event.key == pg.K_RIGHT and player.x_vel > 0:
+				player.stop()	
 
 	pg.display.update()
 	fps_clock.tick(50)
