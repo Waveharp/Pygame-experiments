@@ -2,6 +2,21 @@ import pygame as pg
 import constants as c
 from spritesheet_functions import SpriteSheet
 
+class _Physics(object):
+	"""A simplified physics class. Psuedo-gravity should usually be fine."""
+	def __init__(self):
+		"""Variables affecting gravity."""
+		self.x_vel = self.y_vel = 0
+		self.grav = 0.4
+		self.fall = False
+
+	def physics_update(self):
+		"""If player is falling, add gravity to current y velocity."""
+		if self.fall:
+			self.y_vel += self.grav
+		else:
+			self.y_vel = 0
+
 """
 The Player class will be a player-controlled sprite
 that will collide with the blockers we just created.
@@ -11,15 +26,15 @@ update method, we can refer to this attribute to detect
 collision.
 """
 
-class Player(pg.sprite.Sprite):
-	# attributes for making the player sprite
+class Player(_Physics, pg.sprite.Sprite):
+	# attributes for making and resizing the player sprite
 	initial_r = []
 	initial_l = []
 	walking_frames_r = []
 	walking_frames_l = []
 	direction = "R"
 	size = 0
-	factor = 2
+	factor = 1
 
 	def __init__(self, blockers):
 		super(Player, self).__init__()
@@ -61,9 +76,8 @@ class Player(pg.sprite.Sprite):
 		self.image = self.walking_frames_r[0]
 
 		# set reference to image rect
-		# obiously don't need both of these
-		self.rect = self.image.get_rect()
-		self.rect = self.image.get_rect(x = 100, y = 100)
+		# spawn location:
+		self.rect = self.image.get_rect(x = 200, y = 200)
 		self.x_vel = 0
 		self.y_vel = 0
 		self.blockers = blockers
@@ -115,7 +129,7 @@ class Player(pg.sprite.Sprite):
 
 
 	def jump(self):
-		self.y_vel = -6
+		self.y_vel = -9
 
 	def go_left(self):
 		self.x_vel = -6
