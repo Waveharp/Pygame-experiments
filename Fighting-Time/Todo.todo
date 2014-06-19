@@ -1,4 +1,4 @@
-----	Look up this function for scaling:
+--	Look up this function for scaling:
 		right_images = pg.transform.scale2x(right_images)
 		also found sample code from Mek for this
 	---	I need to figure out how to scale individual sprites as well as the entire tile map.
@@ -10,9 +10,8 @@
 	-	you have to jump, then press left/right. annoying and cumbersome.
 	I think there's some eight directional movement in Mek's sample code
 
----	Separate everything into classes/separate files
-
---	Put main.py in a module
+-----	Separate everything into classes/separate files
+	---	Structured like Mek's Moving Platforms program
 
 ---	Rewrite physics/player class
 
