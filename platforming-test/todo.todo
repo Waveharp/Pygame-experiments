@@ -4,11 +4,13 @@ changes to make:
 
 +----	Some sort of spritesheet function for player graphic
 
+----	player animation
+
 --	how to resize player sprite
 
 ---	tmx rendering for the level file
 
-----	player animation
+--	split classes into different files
 
 --	wall jumps
 
@@ -16,7 +18,7 @@ changes to make:
 
 --	backgrounds
 
--	split classes into different files
+
 
 -	controller support
 
