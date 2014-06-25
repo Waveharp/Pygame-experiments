@@ -2,11 +2,24 @@ import os, sys
 from random import randint, choice
 from math import sin, cos, radians
 
-import pygame as pg 
 from pygame.sprite import Sprite
+import pygame as pg 
+#from pygame.sprite import Sprite
 
 from vec2d import vec2d
 
+
+BG_COLOR = 150, 150, 80
+CREEP_FILENAMES = [
+	'bluecreep.png',
+	'pinkcreep.png',
+	'graycreep.png']
+N_CREEPS = 150
+SCREEN_WIDTH, SCREEN_HEIGHT = 400, 400
+
+screen = pg.display.set_mode(
+		(SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
+creeps = []
 
 class Creep(Sprite):
 	""" A creep sprite that bounces off walls and changes its
@@ -17,17 +30,17 @@ class Creep(Sprite):
 			init_position: A vec2d or a pair specifying the initial
 			position of the creep on the screen. """
 
-	Sprite.__init__(self)
+		Sprite.__init__(self)
 
-	self.screen = screen
-	self.speed = speed
+		self.screen = screen
+		self.speed = speed
 
-	self.base_image = pg.image.load(img_filename).convert_alpha()
-	self.image = self.base_image
+		self.base_image = pg.image.load(img_filename).convert_alpha()
+		self.image = self.base_image
 
-	self.pos = vec2d(init_position)
+		self.pos = vec2d(init_position)
 
-	self.direction = vec2d(init_direction).normalized()
+		self.direction = vec2d(init_direction).normalized()
 
 	def update(self, time_passed):
 		# time to change direction?
@@ -75,42 +88,48 @@ class Creep(Sprite):
 			self.pos.y - self.image_h / 2)
 		self.screen.blit(self.image, draw_pos)
 
+	_counter = 0
 
-SCREEN_WIDTH, SCREEN_HEIGHT = 400, 400
-BG_COLOR = 150, 150, 80
-CREEP_FILENAMES = [
-	'bluecreep.png',
-	'pinkcreep.png',
-	'graycreep.png']
-N_CREEPS = 20
+	def _change_direction(self, time_passed):
+		self._counter += time_passed
+		if self._counter > randint(300, 400):
+			self.direction.rotate(45 * randint(-1, 1))
+			self._counter = 0
 
-pg.init()
-screen = pg.display.set_mode(
-			(SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
-clock = pg.time.Clock()
+def run_game():
+	pg.init()
+	clock = pg.time.Clock()
 
-#create N_CREEPS random creeps
-creeps = []
-for i in range(N_CREEPS):
-	creeps.append(Creep(screen,
+	#create N_CREEPS random creeps
+	make_creeps()
+
+	while True:
+		time_passed = clock.tick(50)
+
+		for event in pg.event.get():
+			if event.type == pg.QUIT:
+				exit_game()
+
+		screen.fill(BG_COLOR)
+
+		for creep in creeps:
+			creep.update(time_passed)
+			creep.blitme()
+
+		pg.display.flip()
+
+def make_creeps():
+	for i in range(N_CREEPS):
+		creeps.append(Creep(screen,
 						choice(CREEP_FILENAMES),
 							(randint(0, SCREEN_WIDTH),
 							randint(0, SCREEN_HEIGHT)),
 							(choice([-1, 1]),
 							choice([-1, 1])),
 							0.1))
+	return creeps
 
-while True:
-	time_passed = clock.tick(50)
+def exit_game():
+	sys.exit()
 
-	for event in pg.event.get():
-		if event.type == pg.QUIT:
-			exit_game()
-
-	screen.fill(BG_COLOR)
-
-	for creep in creeps:
-		creep.update(time_passed)
-		creep.blitme()
-
-	pg.display.flip()
+run_game()
