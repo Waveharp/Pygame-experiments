@@ -4,9 +4,14 @@ changes to make:
 
 +----	Some sort of spritesheet function for player graphic
 
-----	player animation
++----	player animation
+
+----	get player sprite back in game
 
 --	how to resize player sprite
+
+--	Smooth out player animation
+	---	sprite only animates with arrow keys, not wasd
 
 ---	tmx rendering for the level file
 
@@ -15,10 +20,9 @@ changes to make:
 --	wall jumps
 
 --	scaling said level file for different screen sizes
+	----	scale screen
 
 --	backgrounds
-
-
 
 -	controller support
 

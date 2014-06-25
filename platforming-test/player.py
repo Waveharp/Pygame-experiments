@@ -3,9 +3,12 @@ import constants as c
 import tools
 from spritesheet_functions import SpriteSheet 
 
+DIRECT_DICT = {pg.K_LEFT : (-1, 0),
+                pg.K_RIGHT : (1, 0)}
+
 class Player(tools._Physics, pg.sprite.Sprite):
     """Class representing our player."""
-    def __init__(self,location,speed):
+    def __init__(self,location,speed,direction=pg.K_RIGHT):
         """
         The location is an (x,y) coordinate pair, and speed is the player's
         speed in pixels per frame. Speed should be an integer.
@@ -15,30 +18,76 @@ class Player(tools._Physics, pg.sprite.Sprite):
         self.sheet = SpriteSheet("spritesheet.png")
         self.image = self.sheet.get_image(441, 2, 17, 21)
         self.image.set_colorkey(c.SPRITESHEET_BACKGROUND)
-        self.rect = self.image.get_rect(topleft=location)
-        self.direction = "RIGHT"
+        self.rect = self.image.get_rect()
+        self.direction = direction
         self.speed = speed
         self.jump_power = -9.0
         self.jump_cut_magnitude = -3.0
         self.on_moving = False
         self.collide_below = False
 
-    def get_walking_frames(self):
-        self.walking_frames = []
-        sheet = SpriteSheet('p1_walk.png')
-        self.walking_frames.append(27, 2, 16, 21)
-        self.walking_frames.append(49, 2, 16, 21)
-        self.walking_frames.append(71, 2, 16, 21)
+        self.old_direction = None
+        self.direction_stack = []
+        self.redraw = False
+        self.frame = 0
+        self.frames = self.get_frames()
+        self.animate_timer = 0.0
+        self.animate_fps = 7.0
+        self.walkframes = []
+        self.walkframe_dict = self.make_frame_dict()
+        self.adjust_images()
+
+    def get_frames(self):
+        sheet = pg.image.load("p1_walk.png").convert()
+        sheet.set_colorkey(c.SPRITESHEET_BACKGROUND)
+        return tools.get_images(sheet, self.rect.size)
+
+    def make_frame_dict(self):
+        frames = {pg.K_LEFT : [pg.transform.flip(self.frames[0], True, False),
+                               pg.transform.flip(self.frames[1], True, False),
+                               pg.transform.flip(self.frames[2], True, False)],
+                  pg.K_RIGHT: [self.frames[0], self.frames[1], self.frames[2]]}
+        return frames
+
+    def adjust_images(self):
+        if self.direction != self.old_direction:
+            self.walkframes = self.walkframe_dict[self.direction]
+            self.old_direction = self.direction
+            self.redraw = True
+        self.make_image()
+
+    def make_image(self):
+        now = pg.time.get_ticks()
+        if self.redraw or now-self.animate_timer > 1000/self.animate_fps:
+            if self.direction_stack:
+                self.frame = (self.frame+1)%len(self.walkframes)
+                self.image = self.walkframes[self.frame]
+            self.animate_timer = now
+        if not self.image:
+            self.image = self.walkframes[self.frame]
+        self.redraw = False
+
+    def add_direction(self, key):
+        if key in DIRECT_DICT:
+            if key in self.direction_stack:
+                self.direction_stack.remove(key)
+            self.direction_stack.append(key)
+            self.direction = self.direction_stack[-1]
+
+    def pop_direction(self, key):
+        if key in DIRECT_DICT:
+            if key in self.direction_stack:
+                self.direction_stack.remove(key)
+            if self.direction_stack:
+                self.direction = self.direction_stack[-1]
 
     def check_keys(self, keys):
         """Find the player's self.x_vel based on currently held keys."""
         self.x_vel = 0
         if keys[pg.K_LEFT] or keys[pg.K_a]:
             self.x_vel -= self.speed
-            self.direction = "LEFT"
         if keys[pg.K_RIGHT] or keys[pg.K_d]:
             self.x_vel += self.speed
-            self.direction = "RIGHT"
 
     def get_position(self, obstacles):
         """Calculate the player's position this frame, including collisions."""
@@ -121,12 +170,16 @@ class Player(tools._Physics, pg.sprite.Sprite):
         self.collide_below = self.check_below(obstacles)
         self.check_moving(obstacles)
 
-    def update(self, obstacles, keys):
+    def update(self, obstacles, keys, screen_rect):
         """Everything we need to stay updated; ran after platforms update."""
         self.check_keys(keys)
         self.get_position(obstacles)
         self.physics_update()
-        
+        self.adjust_images()
+        if self.direction_stack:
+            direction_vector = DIRECT_DICT[self.direction]
+
+
     def draw(self, surface):
         """Blit the player to the target surface."""
         surface.blit(self.image, self.rect)

@@ -1,17 +1,13 @@
---	Look up this function for scaling:
-		right_images = pg.transform.scale2x(right_images)
-		also found sample code from Mek for this
-	---	I need to figure out how to scale individual sprites as well as the entire tile map.
+Fresh start on Fighting Time
 
---	Player sprite bounces up and down a few pixels after landing from a jump
-		if you fall from a platform onto another, this doesn't happen
+One step at a time
 
-----	Cannot use two keys at once
-	-	you have to jump, then press left/right. annoying and cumbersome.
-	I think there's some eight directional movement in Mek's sample code
+----	Base code
 
------	Separate everything into classes/separate files
-	---	Structured like Mek's Moving Platforms program
+---	Player class
 
----	Rewrite physics/player class
+---	Level class
 
+--	Collision handling
+
+-	States

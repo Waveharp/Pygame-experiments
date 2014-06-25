@@ -1,36 +1,5 @@
-"""
-Basic moving platforms using only rectangle collision.
-
-- Base code written by Sean J. McKiernan 'Mekire'
-- Modified by Waveharp
-"""
-
-import os
-import sys
-import tools, tilerender
-import pygame as pg
-import constants as c 
-from spritesheet_functions import SpriteSheet 
-from player import Player
-
-class Control(object):
-    """Class for managing event loop and game states."""
-    def __init__(self):
-        """Initalize the display and prepare game objects."""
-        self.screen = pg.display.get_surface()
-        self.screen_rect = self.screen.get_rect()
-        self.clock = pg.time.Clock()
-        self.fps = 60.0
-        self.keys = pg.key.get_pressed()
-        self.done = False
-        self.viewport = self.screen.get_rect()
-        self.player = Player((50,50), 4)
-        self.level = pg.Surface((1000,1000)).convert()
-        self.level_rect = self.level.get_rect()
-        self.win_text,self.win_rect = self.make_text()
-        self.obstacles = self.make_obstacles()
-
-    def make_obstacles(self):
+# in Control class
+def make_obstacles(self):
         """Adds some arbitrarily placed obstacles to a sprite.Group."""
         walls = [Block(pg.Color("chocolate"), (0,980,1000,20)),
                  Block(pg.Color("chocolate"), (0,0,20,1000)),
@@ -64,65 +33,7 @@ class Control(object):
         rect = text.get_rect(centerx=self.level_rect.centerx, y=100)
         return text, rect
 
-    def update_viewport(self):
-        """
-        The viewport will stay centered on the player unless the player
-        approaches the edge of the map.
-        """
-        self.viewport.center = self.player.rect.center
-        self.viewport.clamp_ip(self.level_rect)
-
-    def event_loop(self):
-        """We can always quit, and the player can sometimes jump."""
-        for event in pg.event.get():
-            if event.type == pg.QUIT or self.keys[pg.K_ESCAPE]:
-                self.done = True
-            elif event.type == pg.KEYDOWN:
-                if event.key == pg.K_SPACE:
-                    self.player.jump(self.obstacles)
-                self.player.add_direction(event.key)
-            elif event.type == pg.KEYUP:
-                if event.key == pg.K_SPACE:
-                    self.player.jump_cut()
-                self.player.pop_direction(event.key)
-            elif event.type == pg.VIDEORESIZE:
-                self.screen = pg.display.set_mode(event.size, pg.RESIZABLE)
-                self.screen_rect = self.screen.get_rect()
-
-    def update(self):
-        """Update the player, obstacles, and current viewport."""
-        self.keys = pg.key.get_pressed()
-        self.player.pre_update(self.obstacles)
-        self.obstacles.update(self.player, self.obstacles)
-        self.player.update(self.obstacles, self.keys, self.screen_rect)
-        self.update_viewport()
-
-
-    def draw(self):
-        """
-        Draw all necessary objects to the level surface, and then draw
-        the viewport section of the level to the display surface.
-        """
-        self.level.fill(pg.Color("lightblue"))
-        self.obstacles.draw(self.level)
-        self.level.blit(self.win_text, self.win_rect)
-        self.player.draw(self.level)
-        self.screen.blit(self.level, (0,0), self.viewport)
-
-    def display_fps(self):
-        """Show the programs FPS in the window handle."""
-        caption = "{} - FPS: {:.2f}".format(c.CAPTION, self.clock.get_fps())
-        pg.display.set_caption(caption)
-
-    def main_loop(self):
-        """As simple as it gets."""
-        while not self.done:
-            self.event_loop()
-            self.update()
-            self.draw()
-            pg.display.update()
-            self.clock.tick(self.fps)
-            self.display_fps()
+# end control class
 
 class Block(pg.sprite.Sprite):
     """A class representing solid obstacles."""
@@ -199,14 +110,3 @@ class MovingBlock(Block):
         self.waiting = True
         self.timer = now
         self.speed *= -1
-
-
-if __name__ == "__main__":
-    os.environ['SDL_VIDEO_CENTERED'] = '1'
-    pg.init()
-    pg.display.set_caption(c.CAPTION)
-    pg.display.set_mode(c.SCREEN_SIZE)
-    run_it = Control()
-    run_it.main_loop()
-    pg.quit()
-    sys.exit()
