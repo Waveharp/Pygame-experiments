@@ -1,14 +1,23 @@
+import sys, level
 import pygame as pg 
 import constants as c 
 
 
 class Control(object):
-	def __init__(self):
+	def __init__(self, caption):
 		self.screen = pg.display.get_surface()
 		self.clock = pg.time.Clock()
 		self.fps = 60.0
 		self.keys = pg.key.get_pressed()
 		self.done = False
+		self.caption = caption
+		self.level = level.Level()
+
+	def update(self):
+		self.keys = pg.key.get_pressed()
+
+	def draw(self):
+		pass
 
 	def event_loop(self):
 		self.events = pg.event.get()
@@ -23,11 +32,10 @@ class Control(object):
 			elif event.type == pg.KEYUP:
 				self.keys = pg.key.get_pressed()
 
-	def main_loop(self):
+	def main(self):
 		while not self.done:
 			self.event_loop()
+			self.screen.blit(self.level.map_surface, self.level.map_rect)
 			self.update()
-			self.draw()
 			pg.display.update()
 			self.clock.tick(self.fps)
-			self.display_fps()

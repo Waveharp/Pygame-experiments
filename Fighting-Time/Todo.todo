@@ -2,12 +2,26 @@ Fresh start on Fighting Time
 
 One step at a time
 
-----	Base code
-
----	Player class
++----	Base control code
 
 ---	Level class
+	+--	get tmx map on screen
+	--	make blockers
+	--	viewport
+	--	make map fill screen
+	--	scale map
 
---	Collision handling
+---	Player class
+	----	get player on screen
+	----	move player with keys
+	---	collision with blockers
+	---	animation
+	---	player states
+	--	wall jumping
+	-	attacking
+		--	sword attack
+		--	ranged attack
 
--	States
+---	Collision handling
+
+--	States
