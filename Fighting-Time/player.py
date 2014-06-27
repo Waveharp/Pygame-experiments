@@ -1,13 +1,14 @@
 import pygame as pg 
 import constants as c 
+from spritesheet_functions import SpriteSheet 
 
 class Player(pg.sprite.Sprite):
     def __init__(self, blockers):
         super(Player, self).__init__()
-        self.image = pg.Surface((22, 22))
-        self.image.fill((130, 100, 200))
-        self.rect = self.image.get_rect(x=100,
-                                        y=300)
+        self.sheet = SpriteSheet('p1_walk.png')
+        self.image = self.sheet.get_image(4, 2, 17, 21)
+        self.image.set_colorkey(c.SPRITESHEET_BACKGROUND)
+        self.rect = self.image.get_rect(x=100, y=300)
         self.x_vel = 0
         self.y_vel = 0
         self.blockers = blockers

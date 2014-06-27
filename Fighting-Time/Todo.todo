@@ -6,22 +6,34 @@ One step at a time
 
 ---	Level class
 	+--	get tmx map on screen
-	--	make blockers
+	+--	make blockers
+	---	background image
+	---	player start point
 	--	viewport
 	--	make map fill screen
 	--	scale map
 
 ---	Player class
-	----	get player on screen
-	----	move player with keys
-	---	collision with blockers
+	+----	get player on screen
+	+----	move player with keys
+	+----	make player image from sprite sheet
+	----	implement standard platformer movement
+	+---	collision with blockers
 	---	animation
 	---	player states
 	--	wall jumping
 	-	attacking
 		--	sword attack
 		--	ranged attack
+		-	special attack
+	-	different characters
+		-	unique stats
+		-	unique attacks
 
 ---	Collision handling
+	--	physics
+		---	gravity
+
+---	Screen resolution stuff
 
 --	States
