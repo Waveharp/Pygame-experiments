@@ -1,6 +1,7 @@
 import pygame as pg 
 import constants as c 
 import os, tilerender
+import player
 
 class Level(object):
 	def __init__(self):
@@ -10,6 +11,16 @@ class Level(object):
 		self.map_rect = self.map_surface.get_rect()
 
 		self.blockers = self.make_blockers('blocker')
+
+		self.player = self.make_player()
+
+	def make_player(self):
+		for object in self.tile_renderer.tmx_data.getObjects():
+			properties = object.__dict__
+			if properties['name'] == 'player start point':
+				x = properties['x']
+				y = properties['y']
+				return player.Player(x, y, self.blockers)
 
 	def make_blockers(self, blocker_name):
 		blockers = []

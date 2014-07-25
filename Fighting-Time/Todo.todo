@@ -4,11 +4,18 @@ One step at a time
 
 +----	Base control code
 
+--  start menu before actual game
+
+--  'scoreboard' features, display text to screen during game
+
+---	Start commenting code as you go
+	--	add comments to existing code where needed
+
 ---	Level class
 	+--	get tmx map on screen
 	+--	make blockers
 	---	background image
-	---	player start point
+	+---	player start point
 	--	viewport
 	--	make map fill screen
 	--	scale map
@@ -17,10 +24,15 @@ One step at a time
 	+----	get player on screen
 	+----	move player with keys
 	+----	make player image from sprite sheet
-	----	implement standard platformer movement
+	+!----	implement standard platformer movement
+	+-----	implement gravity/falling
+	+-----	implement jumping
 	+---	collision with blockers
+    ---     delta time, make the game framerate independent
+    ----    fix jumping
+        ----    only allow jump when on ground, probably implemented with player states
 	---	animation
-	---	player states
+	-----	player states
 	--	wall jumping
 	-	attacking
 		--	sword attack
@@ -31,9 +43,9 @@ One step at a time
 		-	unique attacks
 
 ---	Collision handling
-	--	physics
-		---	gravity
+	---	gravity
 
 ---	Screen resolution stuff
 
 --	States
+	--	read up on game states

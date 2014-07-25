@@ -12,10 +12,11 @@ class Control(object):
 		self.done = False
 		self.caption = caption
 		self.level = level.Level()
-		self.player = player.Player(self.level.blockers)
+		self.player = self.level.player
 
 	def update(self):
 		self.keys = pg.key.get_pressed()
+		self.player.update(self.keys)
 
 	def draw(self):
 		pass

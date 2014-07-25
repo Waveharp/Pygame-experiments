@@ -14,6 +14,18 @@ SPRITESHEET_BACKGROUND = (94, 129, 162)
 CAPTION = "Fighting Time"
 SCREEN_SIZE = (700,500)
 
-# player states
+# Player states
 STANDING = 'standing'
 WALKING = 'walking'
+FREE_FALL = 'free fall'
+
+# Directions
+RIGHT = 'right'
+LEFT = 'left'
+
+# Player values
+PLAYER_SPEED = 3
+START_JUMP_VEL = -6
+GRAVITY = 4
+
+# Controls

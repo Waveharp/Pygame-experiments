@@ -1,0 +1,1 @@
+This is my first 'real' Pygame project. I'm still working on getting the basic framework for the game done right now, but the eventual plan is to turn it into a local multiplayer arena brawler, a la Samurai Gunn and themed around Adventure Time. 
